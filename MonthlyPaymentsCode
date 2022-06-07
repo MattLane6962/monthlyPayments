@@ -1,0 +1,48 @@
+// This program calculates and displays monthly interest and payment amounts
+// for a loan.
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+    // Declare variables.
+    int numOfPayments;
+    double loanAmount,
+    annualRate,
+    monthlyRate,
+    monthlyPayment,
+    paidBack,
+    interest;
+
+    // Obtain amounts from user.
+    cout << "Please enter the following amounts to generate your monthly payment.\n";
+    cout << "Amount loaned: ";
+    cin >> loanAmount;
+    cout << "Annual interest rate: ";
+    cin >> annualRate;
+    cout << "Number of payments: ";
+    cin >> numOfPayments;
+
+    // Calculate the values needed.
+    annualRate /= 100;
+    monthlyRate = annualRate / 12;
+    monthlyPayment = loanAmount * ((monthlyRate * pow(1 + monthlyRate, numOfPayments)) / (pow(1 + monthlyRate, numOfPayments) - 1));
+    paidBack = monthlyPayment * numOfPayments;
+    interest = paidBack - loanAmount;
+    monthlyRate *= 100;
+
+    // Screen housekeeping, preventing clutter.
+    system ("cls");
+
+    // Format and display report.
+    cout << fixed << setprecision(2);
+    cout << "Amount loaned: $       " << setw(11) << loanAmount << endl;
+    cout << "Monthly interest Rate: " << setw(11) << monthlyRate << "\n";
+    cout << "Number of Payments:    " << setw(11) << numOfPayments << endl;
+    cout << "Monthly Payment: $     " << setw(11) << monthlyPayment << endl;
+    cout << "Amount Paid Back: $    " << setw(11) << paidBack << endl;
+    cout << "interest Paid: $       " << setw(11) << interest << endl;
+    
+    system ("pause");
+    return 0;
